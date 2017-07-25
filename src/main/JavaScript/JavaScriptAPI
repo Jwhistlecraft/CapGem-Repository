@@ -1,0 +1,50 @@
+<html>
+
+   <body>
+     <title> Coding Challenege Nine </title>
+
+        <script>
+        var requestURL ='https://raw.githubusercontent.com/ewomackQA/JSONDataRepo/master/kings.json';
+        var request = new XMLHttpRequest();
+        request.open('GET', requestURL);
+        request.responseType = 'json';
+        request.send();
+
+      function searchKing() {
+           var searchName = document.getElementById("TB1").value;
+           var SK = request.response;
+
+           for (var i = 0; i < SK.length; i ++){
+             if (searchName == SK[i].nm) {
+               document.getElementById("nm").textContent = 'Name: ' + SK[i].nm;
+               document.getElementById("cty").textContent = 'Country: ' + SK[i].cty;
+               document.getElementById("hse").textContent = 'House: ' + SK[i].hse;
+               document.getElementById("yrs").textContent = 'Reign: ' + SK[i].yrs;
+              }
+           }
+      }
+
+      </script>
+
+       <input type="textbox" id="TB1" placeholder="Search for king">
+
+          <button onclick="searchKing()">Search</button>
+
+            <p id="nm"></p>
+            <p id="cty"></p>
+            <p id="hse"></p>
+            <p id="yrs"></p>
+
+      </body>
+
+</html>
+
+
+
+
+
+<!--Similarly, load this JSON file at this address
+https://github.com/womackx/JSONDataRepo/blob/master/kings.json
+Instead of loading all the object on the page,
+have a text box that will take an attribute that belongs to these objects,
+and output the contents of the specific object it’s associated with.-->

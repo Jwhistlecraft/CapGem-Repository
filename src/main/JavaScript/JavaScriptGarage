@@ -1,0 +1,171 @@
+<html>
+   <head>
+     <title> Coding Challenege Ten </title>
+       <script>
+        //Grage Contens
+        var garageContents = []
+
+        //Car Class
+        class Car{
+          constructor (reg,make,model,faults) {
+            this.reg = reg
+            this.make = make
+            this.model = model
+            this.faults = faults
+            }
+        }
+
+        // function to store txt box inputs as variables
+        function createCar() {
+        var getReg = document.getElementById("TB1").value;
+        var getMake = document.getElementById("TB2").value;
+        var getModel = document.getElementById("TB3").value;
+        var getFaults = document.getElementById("TB4").value.split(",");
+        var newCar = new Car(getReg,getMake,getModel,getFaults)
+        console.log(newCar);
+
+        garageContents.push(newCar);
+        console.log(garageContents[0]);
+        }
+        // Show price function
+        function calculatePrice() {
+        var getReg = document.getElementById("TB1").value;
+          for (var i = 0; i < garageContents.length; i++) {
+            if (getReg == garageContents[i].reg) {
+
+        var totalPrice =  garageContents[i].faults.length * 50
+        var myPara3 = document.createElement('p');
+        myPara3.textContent = 'price: ' + totalPrice;
+        document.body.appendChild(myPara3);
+          }
+         }
+        }
+        // Check out Car function
+        function removeCar() {
+        var getReg = document.getElementById("TB1").value;
+          for (var i = 0; i < garageContents.length; i++) {
+            if (getReg == garageContents[i].reg) {
+                  garageContents.splice(i,1)
+            }
+           }
+         }
+
+        // Output Conents
+       function outPutContents(){
+              for (var i = 0; i < garageContents.length; i++) {
+              var myH1 = document.createElement('h1');
+              var myPara1 = document.createElement('p');
+              var myPara2 = document.createElement('p');
+              var myList = document.createElement('ul');
+         myH1.textContent = 'Car reg: ' +garageContents[i].reg;
+         myPara1.textContent = 'Make: ' +garageContents[i].make;
+         myPara2.textContent = 'Model: ' + garageContents[i].model;
+         myList.textContent = 'Faults:';
+        var faults = garageContents[i].faults;
+          for (var j = 0; j < faults.length; j++) {
+               var listItem = document.createElement('li');
+               listItem.textContent = faults[j];
+               myList.appendChild(listItem);
+         }
+        document.body.appendChild(myH1);
+        document.body.appendChild(myPara1);
+        document.body.appendChild(myPara2);
+        document.body.appendChild(myList);
+       }
+      }
+//add 1a2b3 ford mustang brokenDoor,brokenWheel
+      // console interface
+      function cFunc() {
+      var cInput = document.getElementById("TB5").value.split(" ");
+      switch (cInput[0]){
+        //adding a car
+         case "add" :
+         var newCar = new Car(cInput[1],cInput[2],cInput[3],cInput[4].split(","));
+         garageContents.push(newCar);
+         console.log(garageContents[0]);
+         break;
+
+         //removing a car
+         case "remove" :
+         var inputReg = cInput[1];
+          for (var i = 0; i < garageContents.length; i++) {
+            if (inputReg == garageContents[i].reg) {
+         garageContents.splice(i,1)
+         console.log(garageContents[0])
+          }
+         }
+         break;
+
+         //calculating price
+         case "price" :
+         var inputReg =cInput[1]
+          for (var i = 0; i < garageContents.length; i++) {
+            if (inputReg == garageContents[i].reg) {
+
+         var totalPrice =  garageContents[i].faults.length * 50
+         var myPara3 = document.createElement('p');
+         myPara3.textContent = 'price: ' + totalPrice;
+         document.body.appendChild(myPara3);
+          }
+         }
+         break;
+
+         //displaying output of the garage
+         case "output" : outPutContents()
+         break;
+         //clearing garage contents
+         case "clear" : garageContents = []
+         console.log(garageContents[0])
+         break;
+          }
+         }
+       </script>
+          <body>
+
+         <!--text box inputs-->
+         <input type="textbox" id="TB1" placeholder="Enter Car registration">
+         <input type="textbox" id="TB2" placeholder="Enter Car make">
+         <input type="textbox" id="TB3" placeholder="Enter Car model">
+         <input type="textbox" id="TB4" placeholder="Enter Car faults">
+
+
+         <!--buttons-->
+         <input type="button" onclick="createCar()" value="Check in Car" />
+         <input type="button" onclick="calculatePrice()" value="Show Price" />
+         <input type="button" onclick="removeCar()" value="Check out Car" />
+         <input type="button" onclick="outPutContents()" value="Output Contents" />
+
+
+         <br>
+         <br>
+         <br>
+         <input type="textbox" id="TB5" placeholder="Console Interface">
+         <input type="button" onclick="cFunc()" value="Enter" />
+
+         </body>
+     </head>
+</html>
+
+<!--
+CHALLENGE 11
+Once the initial garage application is done, create a console interface that accepts commands to perform the previous commands via the console, instead of the interface e.g.
+add car Peugeot yk10ykm 4
+output Garage
+check in yk10ykm
+bill yk10ykm
+garage changeLimit 10
+garage empty
+Which will output the changes in the console after being ran.
+The commands must be oneliners.
+CHALLENGE 10
+Create a virtual garage with the following functionality;
+Check in cars to the garage
+Check out cars
+Output the contents of the garage
+Calculate the bill for a car, dependant on its attributes
+All of these should be able to be done via a user interface, as well as the following non-garage related features;
+Creating cars
+Creating cars with no faults
+Creating cars with numerous faults
+
+-->
