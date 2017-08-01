@@ -1,0 +1,11 @@
+# Home page
+  GET     /                           controllers.Application.index
+
+# we define a route for listing all the CDs and another one for submitting the form of adding them
+  GET     /cds                        controllers.Application.listCDs
+POST    /cds                        controllers.Application.createCD
+
+# Map static resources from the /public folder to the /assets URL path
+  GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+GET     /load                       controllers.Application.editCD(index: Int)
