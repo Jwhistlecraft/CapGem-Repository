@@ -92,3 +92,32 @@ def  lstSum(list: List[Int]) :Int = list match{
 lstSum(List())
 lstSum(List(1,2))
 lstSum(List(1,2,3))
+
+//guards
+
+def bmiTell(weight : Float, height: Float):String = {
+  val bmi = weight / height * height
+  bmi match {
+    case emo if bmi <= 18.5 => "You're underweight, you emo, you!"
+    case normal if bmi <= 25.0 => "You're supposedly normal. Pffft, I bet you're ugly!"
+    case fat if bmi <= 30.0 => "You're fat! Lose some weight, fatty!"
+    case _ => "You're a whale, congratulations!"
+  }
+}
+
+bmiTell(20f, 150f)
+bmiTell(10f, 100f)
+bmiTell(30f,200f)
+
+
+def max(a: Int, b:Int): Int = a match{
+  case x if a > b => a
+  case _ => b
+}
+
+//recursion
+
+//def maximun(lst:List[Int]): List[Int] ={
+  
+//}
+
