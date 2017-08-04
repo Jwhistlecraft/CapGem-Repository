@@ -12,7 +12,6 @@ case class CD(index:Option[Int],
               starRating:Int,
               price: Int)
 
-//case class SelectCD(title:String)
 
 object CD {
 
