@@ -104,9 +104,4 @@ def max(a: Int, b:Int): Int = a match{
   case _ => b
 }
 
-//recursion
-
-//def maximun(lst:List[Int]): List[Int] ={
-  
-//}
 
