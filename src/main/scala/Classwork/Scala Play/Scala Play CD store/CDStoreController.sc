@@ -28,7 +28,6 @@ class Application @Inject()(val messagesApi: MessagesApi) extends Controller wit
   }
 
   def createCD = Action { implicit request =>
-    //    val postAction = request.body.asFormUrlEncoded.get("action").get(0)
     val postAction = request.body.asFormUrlEncoded.get("action").head
     val formValidationResult = CD.createCDForm.bindFromRequest
     formValidationResult.fold({ formWithErrors =>
