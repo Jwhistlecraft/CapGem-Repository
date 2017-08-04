@@ -46,17 +46,6 @@ def addVectors(a:Vector[Int], b:Vector[Int]):Vector[Int] = {
   }
 }
 
-/* def addVectors(a:Vector[Int], b:Vector[Int]):Vector[Int] = {
-   a.length.toString match{
-     case "0" => new Vector[Int]
-     case "1" => new Vector[Int](a(0)+b(0))
-     case "2" => new Vector[Int](a(0)+b(0))
-     case _ => new Vector[Int](a(0)+b(0), a(1)+b(1), a(3)+b(3))
-   }
- }
-
-println(addVectors(Vector(1),Vector(2))) */
-
 
 def headEx(list : List[Any]):Any = list.length match{
   case 0 => "can't call head on an empty list dummy!"
