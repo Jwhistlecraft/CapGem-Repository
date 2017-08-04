@@ -27,22 +27,19 @@ class Application @Inject()(val messagesApi: MessagesApi) extends Controller wit
     Ok(views.html.listCDs(CD.cds, CD.createCDForm.fill(cdData)))
   }
 
-  def createCD = Action { implicit request =>
+def createCD = Action { implicit request =>
     val postAction = request.body.asFormUrlEncoded.get("action").head
     val formValidationResult = CD.createCDForm.bindFromRequest
     formValidationResult.fold({ formWithErrors =>
       BadRequest(views.html.listCDs(CD.cds, formWithErrors)) //form with errors
     }, { cdData =>
       println("postAction is " + postAction)
-      if (cdData.index.get != -1 && postAction == "save") {
-        println("in edit")
-        CD.cds.update(cdData.index.get, cdData)
-      } else if (cdData.index.get != -1 && postAction == "delete") {
-        println("in delete")
-        CD.cds.remove(cdData.index.get)
-      } else {
-        println("in create")
-        CD.cds.append(cdData)
+
+      val hasId = cdData.index.get != -1
+      postAction match {
+        case "save" if hasId => CD.cds.update(cdData.index.get, cdData)
+        case "delete" if hasId => CD.cds.remove(cdData.index.get)
+        case _ =>  CD.cds.append(cdData)
       }
 
       Redirect(routes.Application.listCDs)
